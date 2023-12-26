@@ -70,12 +70,27 @@ class Principal extends Controlador
                 } else {
                     $data['imagen'] = null;
                 }
+
+                if (isset($result[0]['stock'])) {
+                    $data['stock'] = $result[0]['stock'];
+                } else {
+                    $data['stock'] = null;
+                }
                 
                 $subTotal = $data['precio'] * $producto['cantidad'];
+                $data['cantidad'] = $producto['cantidad'];
                 $data['subTotal'] = number_format($subTotal);
                 
-                array_push($array['producto'], $data);
-                $total += $subTotal;
+               // if ($producto['cantidad'] <= $data['stock']){
+                    
+                    array_push($array['producto'], $data);
+                    $total += $subTotal;
+                    
+               // } else {
+                    
+                    
+                //}
+                
             }
         }        
 

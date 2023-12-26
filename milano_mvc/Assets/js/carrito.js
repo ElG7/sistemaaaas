@@ -61,6 +61,8 @@ function cantidadCarrito() {
 }
 
 //ver carrito  
+let stockprod = 0;
+
 function getListaCarrito() {
   
 
@@ -75,8 +77,11 @@ function getListaCarrito() {
       let html = "";
       if (res && res.producto && Array.isArray(res.producto)) {
 
+       
         res.producto.forEach((producto) => {
-        html += `<tr>
+
+          if( producto.cantidad <= producto.stock && producto.cantidad >= 0 ) {
+            html += `<tr>
                     <td>
                     <img class="img-thumbnail" src="${
                       base_url + producto.imagen
@@ -101,7 +106,20 @@ function getListaCarrito() {
                     }"><i class="fas fa-times-circle"></i></button>
                     </td>
                 </tr>`;
-      });
+
+          } else{
+           
+            for (let i = 0; i < listaCarrito.length; i++) {
+              if (listaCarrito[i]["cod_producto"] == producto.cod_producto) {
+                listaCarrito.splice(i, 1);
+              }
+            }
+            localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
+            getListaCarrito();
+            cantidadCarrito();
+            Swal.fire("Lo lamentamos!", "Has seleccionado una cantidad negativa o se supera el stock del producto " + producto.nombre_producto , "error");}
+          
+            }); 
     }else {
       console.error("La respuesta no tiene la estructura esperada:", res);
     }
@@ -139,10 +157,14 @@ function eliminarListaCarrito(cod_producto) {
 function cambiarCantidad() {
   let listaCantidad = document.querySelectorAll(".agregarCantidad");
   for (let i = 0; i < listaCantidad.length; i++) {
+    
+    
     listaCantidad[i].addEventListener("change", function () {
       let cod_producto = listaCantidad[i].id;
       let cantidad = listaCantidad[i].value;
-      incrementarCantidad(cod_producto, cantidad);
+
+
+        incrementarCantidad(cod_producto, cantidad);
     });
   }
 }

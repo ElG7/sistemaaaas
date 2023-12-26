@@ -55,6 +55,7 @@ function getListaProducto() {
       let html = "";
       if (res && res.producto && Array.isArray(res.producto)) {
         res.producto.forEach((producto) => {
+          if( producto.cantidad <= producto.stock && producto.cantidad >= 0 ) {
           html += `<tr>
                       <td>
                       <img class="img-thumbnail" src="${base_url + producto.imagen
@@ -64,8 +65,9 @@ function getListaProducto() {
                       <td><span class="badge bg-custom-orange text-white">${res.moneda + " " + producto.precio
             }</span></td>
                       <td width="100">
-                      <input type="number" class="form-control agregarCantidad" id="${producto.cod_producto
-            }" value="$${producto.cantidad}" step="1">
+                      <input type="number" class="form-control agregarCantidad" id="${
+                        producto.cod_producto
+                      }" value="${producto.cantidad}" step="1">
                       <button class="btn btn-custom-orange btnReloadPage" type="button" onclick="location.reload();">
                         <i class="fas fa-sync-alt"></i>
                       </button>
@@ -76,6 +78,21 @@ function getListaProducto() {
             }" ><i class="fas fa-times-circle"></i></button>
                       </td>
                   </tr>`;
+
+                } else {
+                  for (let i = 0; i < listaCarrito.length; i++) {
+                    if (listaCarrito[i]["cod_producto"] == producto.cod_producto) {
+                      listaCarrito.splice(i, 1);
+                    }
+                  }
+                  localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
+                  getListaCarrito();
+                  cantidadCarrito();
+                  Swal.fire("Lo lamentamos!", "Has seleccionado una cantidad negativa o se supera el stock del producto " + producto.nombre_producto , "error");
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1500);}
+                  
         });
         totalCarrito = res.total;
       } else {
@@ -113,13 +130,18 @@ function eliminarListaProducto(cod_producto) {
   Swal.fire("¡Aviso!", "Se eliminara el producto del carrito", "error");
 }
 //cambiar la cantidad
-function cambiarCantidad() {
+function cambiarCantidad(stockprod) {
   let listaCantidad = document.querySelectorAll(".agregarCantidad");
   for (let i = 0; i < listaCantidad.length; i++) {
+    
+    
     listaCantidad[i].addEventListener("change", function () {
       let cod_producto = listaCantidad[i].id;
       let cantidad = listaCantidad[i].value;
-      incrementarCantidad(cod_producto, cantidad);
+
+      
+        incrementarCantidad(cod_producto, cantidad);
+      
     });
   }
 }

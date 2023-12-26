@@ -55,12 +55,12 @@ class ClientesModel extends Query{
         return $res;
     }
 
-    public function actualizarStock($cod_producto, $cantidadVendida)
+    public function actualizarStock($cantidadVendida,$cod_producto)
 {
     // Realiza la lógica para actualizar el stock en la base de datos
-    $sql = "UPDATE producto SET stock = stock - '$cantidadVendida' WHERE cod_producto = '$cod_producto'";
+    $sql = "UPDATE producto SET stock = stock - ? WHERE cod_producto = ?";
     
-    $datos = array($cod_producto,$cantidadVendida);
+    $datos = array($cantidadVendida,$cod_producto);
     return $this->save($sql, $datos);
 }
 

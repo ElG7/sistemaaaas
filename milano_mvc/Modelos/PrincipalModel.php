@@ -29,7 +29,7 @@ class PrincipalModel extends Query{
 
     public function getListaProducto($cod_producto)
     {
-        $sql = "SELECT cod_producto,nombre_producto,precio,imagen FROM producto WHERE cod_producto = $cod_producto";
+        $sql = "SELECT cod_producto,nombre_producto,precio,imagen,stock FROM producto WHERE cod_producto = $cod_producto";
         return $this->select($sql);
     }
 
