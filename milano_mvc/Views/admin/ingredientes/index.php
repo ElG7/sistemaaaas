@@ -2,25 +2,25 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="listaProducto" data-bs-toggle="tab" data-bs-target="#listaProductoTab" type="button" role="tab" aria-controls="listaProducto" aria-selected="true">Productos</button>
+        <button class="nav-link active" id="listaIngrediente" data-bs-toggle="tab" data-bs-target="#listaIngredienteTab" type="button" role="tab" aria-controls="listaIngrediente" aria-selected="true">Productos</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="nuevoProducto" data-bs-toggle="tab" data-bs-target="#nuevoProductoTab" type="button" role="tab" aria-controls="nuevoProducto" aria-selected="false">Nuevo</button>
+        <button class="nav-link" id="nuevoIngrediente" data-bs-toggle="tab" data-bs-target="#nuevoIngredienteTab" type="button" role="tab" aria-controls="nuevoIngrediente" aria-selected="false">Nuevo</button>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="listaProductoTab" role="tabpanel" aria-labelledby="listaProducto">
+    <div class="tab-pane fade show active" id="listaIngredienteTab" role="tabpanel" aria-labelledby="listaIngrediente">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover" style="width: 100;" id="tblProductos">
+                    <table class="table table-bordered table-striped table-hover" style="width: 100;" id="tblIngredientes">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nombre Producto</th>
+                                <th>Nombre Ingrediente</th>
                                 <th>Stock</th>
-                                <th>Precio</th>
-                                <th>Imagen</th>
+                                <th>Detalle</th>
+                                <th>Codigo Producto que pertenece</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="nuevoProductoTab" role="tabpanel" aria-labelledby="nuevoProducto">
+    <div class="tab-pane fade" id="nuevoIngredienteTab" role="tabpanel" aria-labelledby="nuevoIngrediente">
         <!-- Aquí va el contenido de la pestaña Nuevo -->
         <div class="card">
             <div class="card-body">
@@ -40,20 +40,20 @@
                         <input type="hidden" id="imagen_actual" name="imagen_actual">
                         <div class="col-md-5">
                             <div class="form-group mb-2">
-                                <label for="cod_producto">Codigo Producto</label>
-                                <input id="cod_producto" class="form-control" type="number" name="cod_producto" placeholder="Codigo Producto">
+                                <label for="cod_ingrediente">Codigo Ingrediente</label>
+                                <input id="cod_ingrediente" class="form-control" type="number" name="cod_ingrediente" placeholder="Codigo Ingrediente">
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group mb-2">
-                                <label for="nombre_producto">Nombre Producto</label>
-                                <input id="nombre_producto" class="form-control" type="text" name="nombre_producto" placeholder="Nombre Producto">
+                                <label for="nombre_ingrediente">Nombre Ingrediente</label>
+                                <input id="nombre_ingrediente" class="form-control" type="text" name="nombre_ingrediente" placeholder="Nombre Ingrediente">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group mb-2">
-                                <label for="precio">Precio</label>
-                                <input id="precio" class="form-control" type="number" name="precio" placeholder="Precio">
+                                <label for="detalle">Detalle</label>
+                                <input id="detalle" class="form-control" type="text" name="detalle" placeholder="Detalle">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -64,8 +64,8 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group mb-2">
-                                <label for="sabor">Sabor</label>
-                                <input id="sabor" class="form-control" type="text" name="sabor" placeholder="Sabor">
+                                <label for="producto_cod_producto">Producto al cual pertenece</label>
+                                <input id="producto_cod_producto" class="form-control" type="number" name="producto_cod_producto" placeholder="Producto al cual pertenece">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -74,24 +74,6 @@
                                 <input id="fecha_vencimiento" class="form-control" type="date" name="fecha_vencimiento" placeholder="Fecha Vencimiento">
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="categoria">Categoria</label>
-                                <select id="categoria" class="form-control" name="categoria">
-                                    <option value="">Seleccionar</option>
-                                    <option value="Bote">Bote</option>
-                                    <option value="Paleta">Paleta</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="imagen">Imagen</label>
-                                <input id="imagen" class="form-control-file" type="file" name="imagen" placeholder="Imagen">
-                            </div>
-                        </div>
-
                     </div>
                     <div class="text-end">
                         <button class="btn btn-primary" type="sumbit" id="btnAccion">Registrar</button>
@@ -114,7 +96,7 @@
 </html>
 
 <link rel="stylesheet" href="<?php echo BASE_URL . 'Assets/css/bootstrap.min.css'; ?>">
-<script src="<?php echo BASE_URL . 'Assets/js/modulos/productos.js'; ?>"></script>
+<script src="<?php echo BASE_URL . 'Assets/js/modulos/ingredientes.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/js/bootstrap.bundle.min.js'; ?>"></script>
 <script src="<?php echo BASE_URL . 'Assets/js/es-ES.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo BASE_URL . 'Assets/DataTables/datatables.min.js'; ?>"></script>

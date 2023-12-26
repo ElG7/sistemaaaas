@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
             { data: 'telefono' },
             { data: 'accion' },
         ],
+        language,
+        dom,
+        buttons,
     });
     nuevo.addEventListener('click', function () {
         document.querySelector('#rut').value = ' ';

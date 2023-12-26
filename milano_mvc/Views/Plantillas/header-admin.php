@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo BASE_URL . 'admin/home';?>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo BASE_URL . 'admin/home'; ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo BASE_URL . 'admin/home';?>">
+                <a class="nav-link" href="<?php echo BASE_URL . 'admin/home'; ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Estadisticas</span></a>
             </li>
@@ -58,22 +58,35 @@
 
             <!-- Nav Item - Usuarios Collapse Menu -->
             <li class="nav-item">
-                <a href="<?php echo BASE_URL . 'usuarios';?>">
-                    <div class="nav-link collapsed"><i class="fas fa-fw fa-cog"></i>Usuarios</div>
+                <a href="<?php echo BASE_URL . 'usuarios'; ?>">
+                    <div class="nav-link collapsed"><i class="fas fa-fw fa-users"></i>Usuarios</div>
                 </a>
             </li>
 
             <!-- Nav Item - Productos Collapse Menu -->
             <li class="nav-item">
-                <a href="<?php echo BASE_URL . 'productos';?>">
-                    <div class="nav-link collapsed"><i class="fas fa-fw fa-cog"></i>Productos</div>
+                <a href="<?php echo BASE_URL . 'productos'; ?>">
+                    <div class="nav-link collapsed"><i class="fas fa-fw fa-list"></i>Productos</div>
                 </a>
             </li>
 
-             <!-- Nav Item - Ofertas Collapse Menu -->
-             <li class="nav-item">
-                <a href="<?php echo BASE_URL . 'ofertas';?>">
-                    <div class="nav-link collapsed"><i class="fas fa-fw fa-cog"></i>Ofertas</div>
+            <!-- Nav Item - Ingredientes Collapse Menu -->
+            <li class="nav-item">
+                <a href="<?php echo BASE_URL . 'ingredientes'; ?>">
+                    <div class="nav-link collapsed"><i class="fas fa-fw fa-list"></i>Ingredientes</div>
+                </a>
+            </li>
+
+            <!-- Nav Item - Ofertas Collapse Menu -->
+            <li class="nav-item">
+                <a href="<?php echo BASE_URL . 'ofertas'; ?>">
+                    <div class="nav-link collapsed"><i class="fas fa-fw fa-tags"></i>Ofertas</div>
+                </a>
+            </li>
+            <!-- Nav Item - Pedidos Collapse Menu -->
+            <li class="nav-item">
+                <a href="<?php echo BASE_URL . 'pedidos'; ?>">
+                    <div class="nav-link collapsed"><i class="fas fa-fw fa-bell"></i>Pedidos</div>
                 </a>
             </li>
 

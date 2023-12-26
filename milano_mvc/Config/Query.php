@@ -34,7 +34,7 @@ class Query extends Conexion {
         }
         return $res;
     }
-    public function insertar($sql, $datos)
+    public function insertar($sql, array $datos)
     {
         $this->sql = $sql;
         $this->datos = $datos;

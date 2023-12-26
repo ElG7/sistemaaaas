@@ -16,10 +16,10 @@ class Productos extends Controlador
     {
         $data = $this->model->getProductos(1);
         for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['imagen'] = '<img class="img-thumbnail" src="' . $data[$i]['imagen']. '" alt="'. $data[$i]['nombre_producto'].'" width="50">';
+            $data[$i]['imagen'] = '<img class="img-thumbnail" src="' . $data[$i]['imagen'] . '" alt="' . $data[$i]['nombre_producto'] . '" width="50">';
             $data[$i]['accion'] = '<img class="d-flex">
-            <button class="btn btn-primary" type="button" onclick="editProducto(' . $data[$i]['cod_producto'] . ')"><i class="fas fa-edit"></i></button>
-            <button class="btn btn-danger" type="button" onclick="eliminarProducto(' . $data[$i]['cod_producto'] . ')"><i class="fas fa-trash"></i></button>
+            <button class="btn btn-primary" type="button" onclick="editPro(' . $data[$i]['cod_producto'] . ')"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-danger" type="button" onclick="eliminarPro(' . $data[$i]['cod_producto'] . ')"><i class="fas fa-trash"></i></button>
         </div>';
         }
         echo json_encode($data);
@@ -28,37 +28,48 @@ class Productos extends Controlador
 
     public function registrar()
     {
-        if (isset($_POST['nombre'])) {
-            $nombre = $_POST['nombre'];
-            $rut = $_POST['rut'];
-            $email = $_POST['email'];
-            $telefono = $_POST['telefono'];
-            $nom_usuario = $_POST['nom_usuario'];
-            $contrasena = $_POST['contrasena'];
-            $hash = password_hash($contrasena, PASSWORD_DEFAULT);
-            $fecha_nacimiento = $_POST['fecha_nacimiento'];
-            if (empty($_POST['nombre']) || empty($_POST['rut']) || empty($_POST['email']) || empty($_POST['telefono']) || empty($_POST['nom_usuario']) || empty($_POST['contrasena']) || empty($_POST['fecha_nacimiento'])) {
+        if (isset($_POST['nombre_producto']) && isset($_POST['cod_producto'])) {
+            $nombre_producto = $_POST['nombre_producto'];
+            $cod_producto = $_POST['cod_producto'];
+            $precio = $_POST['precio'];
+            $stock = $_POST['stock'];
+            $imagen = $_FILES['imagen'];
+            $tmp_name = $imagen['tmp_name'];
+            $categoria = $_POST['categoria'];
+            $sabor = $_POST['sabor'];
+            $fecha_vencimiento = $_POST['fecha_vencimiento'];
+            $ruta = 'img_prod/';
+            $nombreImg = date('YmdHis');
+            if (empty($nombre_producto) || empty($precio) || empty($stock) || empty($imagen) || empty($categoria) || empty($sabor) || empty($fecha_vencimiento)) {
                 $respuesta = array('msg' => 'Todos los campos son requeridos', 'icono' => 'warning');
             } else {
-                if (empty($rut)) {
-                    $result = $this->model->verificarCorreo($email);
-                    if (empty($result)) {
-                        $data = $this->model->registrar($nombre, $rut, $email, $telefono, $nom_usuario, $hash, $fecha_nacimiento);
-                        if ($data > 0) {
-                            $respuesta = array('msg' => 'Error al registrar', 'icono' => 'warning');
-                        } else {
-                            $respuesta = array('msg' => 'Usuario Registrado', 'icono' => 'success');
+                if (!empty($imagen['name'])) {
+                    $destino = $ruta . $nombreImg . '.jpg';
+                } else if (!empty($_POST['imagen_actual']) && empty($imagen['name'])) {
+                    $destino = $_POST['imagen_actual'];
+                } else {
+                    $destino = $ruta . 'default.png';
+                }
+                if (empty($cod_producto)) {
+                    $data = $this->model->registrar($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $destino);
+                    if ($data > 0) {
+                        if (!empty($imagen['name'])) {
+                            move_uploaded_file($tmp_name, $destino);
                         }
+                        $respuesta = array('msg' => 'producto registrado', 'icono' => 'success');
                     } else {
-                        $respuesta = array('msg' => 'Correo ya existe', 'icono' => 'warning');
+                        $respuesta = array('msg' => 'error al registrar', 'icono' => 'error');
                     }
                 } else {
-                    $data = $this->model->modificar($nombre, $rut, $email, $telefono, $nom_usuario, $fecha_nacimiento);
-                        if ($data == 1) {
-                            $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
-                        } else {
-                            $respuesta = array('msg' => 'Usuario Modificado', 'icono' => 'success');
+                    $data = $this->model->modificar($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $imagen);
+                    if ($data == 1) {
+                        if (!empty($imagen['name'])) {
+                            move_uploaded_file($tmp_name, $destino);
                         }
+                        $respuesta = array('msg' => 'producto modificado', 'icono' => 'success');
+                    } else {
+                        $respuesta = array('msg' => 'error al modificar', 'icono' => 'error');
+                    }
                 }
             }
             echo json_encode($respuesta);
@@ -66,12 +77,15 @@ class Productos extends Controlador
         die();
     }
 
-    public function delete($idUser)
+
+
+
+    public function delete($idPro)
     {
-        if (is_numeric($idUser)) {
-            $data = $this->model->eliminar($idUser);
+        if (is_numeric($idPro)) {
+            $data = $this->model->eliminar($idPro);
             if ($data == 1) {
-                $respuesta = array('msg' => 'usuario dado de baja', 'icono' => 'success');
+                $respuesta = array('msg' => 'producto dado de baja', 'icono' => 'success');
             } else {
                 $respuesta = array('msg' => 'error al eliminar', 'icono' => 'warning');
             }
@@ -82,10 +96,10 @@ class Productos extends Controlador
         die();
     }
 
-    public function edit($idUser)
+    public function edit($idPro)
     {
-        if (is_numeric($idUser)) {
-            $data = $this->model->getUsuario($idUser);
+        if (is_numeric($idPro)) {
+            $data = $this->model->getProducto($idPro);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         die();

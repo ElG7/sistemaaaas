@@ -12,36 +12,30 @@ class ProductosModel extends Query
         return $this->selectAll($sql);
     }
 
-    public function registrar($nombre, $rut, $email, $telefono, $nom_usuario, $contrasena, $fecha_nacimiento)
+    public function registrar($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $imagen)
     {
-        $sql = "INSERT INTO cliente (rut, nombre, email, telefono, nom_usuario, contrasena, fecha_nacimiento) VALUES (?,?,?,?,?,?,?)";
-        $array = array($rut, $nombre, $email, $telefono, $nom_usuario, $contrasena, $fecha_nacimiento);
+        $sql = "INSERT INTO producto (nombre_producto, cod_producto, precio, stock, sabor, fecha_vencimiento, categoria, imagen) VALUES (?,?,?,?,?,?,?,?)";
+        $array = array($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $imagen);
         return $this->insertar($sql, $array);
     }
 
-    public function verificarCorreo($email)
+    public function eliminar($idPro)
     {
-        $sql="SELECT email FROM cliente WHERE email = '$email'";
-        return $this->select($sql);
-    }
-
-    public function eliminar($idUser)
-    {
-        $sql="UPDATE cliente SET estado = ? WHERE rut = ?";
-        $array = array(0, $idUser);
+        $sql="UPDATE producto SET estado = ? WHERE cod_producto = ?";
+        $array = array(0, $idPro);
         return $this->save($sql, $array);
     }
 
-    public function getUsuario($idUser)
+    public function getProducto($idPro)
     {
-        $sql = "SELECT rut, nombre, email, telefono, nom_usuario FROM cliente WHERE rut = '$idUser'";
+        $sql = "SELECT * FROM producto WHERE cod_producto = '$idPro'";
         return $this->select($sql);
     }
 
-    public function modificar($nombre, $rut, $email, $telefono, $nom_usuario, $fecha_nacimiento)
+    public function modificar($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $imagen)
     {
-        $sql = "UPDATE cliente SET nombre=?, email=?, telefono=?, nom_usuario=?, fecha_nacimiento=? WHERE rut = '$rut'";
-        $array = array($nombre, $email, $telefono, $nom_usuario, $fecha_nacimiento);
+        $sql = "UPDATE producto SET nombre_producto=?, precio=?, stock=?, sabor=?, fecha_vencimiento=?, categoria=?, imagen=? WHERE cod_producto = '$cod_producto'";
+        $array = array($nombre_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $imagen);
         return $this->insertar($sql, $array);
     }
 }
