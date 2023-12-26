@@ -128,7 +128,7 @@ class Clientes extends Controlador
                     $cod_producto['cod_producto']
                 );
                 
-                //$this->model->actualizarStock($cod_producto['cod_producto'],$producto['cantidad']);
+                $this->model->actualizarStock($producto['cantidad'],$cod_producto['cod_producto']);
 
                 if ($resultadoDetalle  <= 0) {
                     // Manejar el caso en que no se pudo registrar el detalle
