@@ -83,11 +83,11 @@
 						<div class="col-md-12" id="frmLogin">
 							<div class="form-group mb-3">
 								<label for="correoLogin"><i class="fas fa-envelope"></i> Correo</label>
-								<input id="correoLogin" class="form-control" type="text" name="correoLogin" placeholder="Email">
+								<input id="correoLogin" class="form-control" type="email" name="correoLogin" placeholder="Email">
 							</div>
 							<div class="form-group mb-3">
 								<label for="contrasenaLogin"><i class="fas fa-key"></i> Contraseña</label>
-								<input id="contrasenaLogin" class="form-control" type="text" name="contrasenaLogin" placeholder="Contraseña">
+								<input id="contrasenaLogin" class="form-control" type="password" name="contrasenaLogin" placeholder="Contraseña">
 							</div>
 							<a href="#" id="btnRegister">No tienes una cuenta? Registrate aquí</a>
 							<div class="float-end">
@@ -167,8 +167,8 @@
 				<p class="title-footer">Información</p>
 				<ul>
 					<li><a href="<?php echo BASE_URL . 'principal/sobre_nosotros' ?>">Sobre Nosotros</a></li>
-					<li><a href="<?php echo BASE_URL . 'docs/gm_pdp.pdf' ?>" target="_blank">Politicas de Privacidad</a></li>
-					<li><a href="<?php echo BASE_URL . 'docs/gm_tyc.pdf' ?>" target="_blank">Términos y condiciones</a></li>
+					<li><a href="<?php echo BASE_URL . 'Assets/docs/gm_pdp.pdf' ?>" target="_blank">Politicas de Privacidad</a></li>
+					<li><a href="<?php echo BASE_URL . 'Assets/docs/gm_tyc.pdf' ?>" target="_blank">Términos y condiciones</a></li>
 				</ul>
 			</div>
 

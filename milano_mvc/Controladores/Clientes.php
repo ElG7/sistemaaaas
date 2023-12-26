@@ -55,7 +55,8 @@ class Clientes extends Controlador
                 $contrasena = $_POST['contrasenaLogin'];
                 $verificar = $this->model->getVerificar($email);
                 
-                $usuarioData= $verificar[0];
+                if (!empty($verificar)) {
+                    $usuarioData = $verificar[0];
                 
                 if (!empty($verificar)) {
                     if (password_verify($contrasena, $usuarioData['contrasena'])) {
@@ -66,6 +67,7 @@ class Clientes extends Controlador
                     } else {
                         $mensaje = array('msg' => 'CONTRASEÑA INCORRECTA', 'icono' => 'error');
                     }
+                } 
                 } else {
                     $mensaje = array('msg' => 'EL CORREO NO EXISTE', 'icono' => 'warning');
                 }
