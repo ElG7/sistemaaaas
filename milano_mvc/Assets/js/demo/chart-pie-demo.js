@@ -3,20 +3,27 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
+var nomProducto = prodMasVendido.map(function (item) {
+  return item.producto_nombre;
+});
+
+var prodVendidos = prodMasVendido.map(function (item) {
+  return item.productos_vendidos;
+});
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: nomProducto,
     datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      data: prodVendidos,
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#FF6384', '#FFCE56'],
+      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#FF6384', '#FFCE56'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
   options: {
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
       bodyFontColor: "#858796",
@@ -28,8 +35,9 @@ var myPieChart = new Chart(ctx, {
       caretPadding: 10,
     },
     legend: {
-      display: false
+      display: true,
+      position: 'bottom'
     },
-    cutoutPercentage: 80,
+    cutoutPercentage: 50,
   },
 });

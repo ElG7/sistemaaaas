@@ -43,9 +43,18 @@ class Admin extends Controlador
         die();
     }
 
-    public function home(){
-        
+    public function home()
+    {
+
         $data['title'] = 'Panel Administrativo';
+        $data['pendientes'] = $this->model->getPendientes();
+        $data['aceptados'] = $this->model->getAceptados();
+        $data['completados'] = $this->model->getCompletados();
+        $data['ventas'] = $this->model->getTotales();
+        $data['ventasPorDia'] = $this->model->getVentasPorUltimos7Dias();
+        $data['prodMasVendido'] = $this->model->getProductosMasVendidos();
+        $data['prodMenorStock'] = $this->model->getProductosMenorStock();
         $this->views->getView('admin/administracion', "index", $data);
+        
     }
 }
