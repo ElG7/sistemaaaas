@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Admin extends Controlador
 {
     public function __construct()
@@ -54,6 +54,7 @@ class Admin extends Controlador
         $data['ventasPorDia'] = $this->model->getVentasPorUltimos7Dias();
         $data['prodMasVendido'] = $this->model->getProductosMasVendidos();
         $data['prodMenorStock'] = $this->model->getProductosMenorStock();
+        $data['prodMenosVendido'] = $this->model->getProductosMenosVendidos();
         $this->views->getView('admin/administracion', "index", $data);
         
     }
