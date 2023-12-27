@@ -20,7 +20,6 @@
                                 <th>Nombre Ingrediente</th>
                                 <th>Stock</th>
                                 <th>Detalle</th>
-                                <th>Codigo Producto que pertenece</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
@@ -60,12 +59,6 @@
                             <div class="form-group mb-2">
                                 <label for="stock">Stock</label>
                                 <input id="stock" class="form-control" type="number" name="stock" placeholder="Stock">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group mb-2">
-                                <label for="producto_cod_producto">Producto al cual pertenece</label>
-                                <input id="producto_cod_producto" class="form-control" type="number" name="producto_cod_producto" placeholder="Producto al cual pertenece">
                             </div>
                         </div>
                         <div class="col-md-2">

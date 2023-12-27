@@ -4,6 +4,7 @@ let tblProductos;
 
 var firstTabEl = document.querySelector('#myTab li:last-child button')
 var firstTab = new bootstrap.Tab(firstTabEl)
+
 document.addEventListener("DOMContentLoaded", function () {
     tblProductos = $('#tblProductos').DataTable({
         ajax: {
@@ -29,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const url = "https://acinfo.inf.unap.cl/~brojas/interfaz2/milano_mvc/productos/registrar";
         const http = new XMLHttpRequest();
         http.open("POST", url, true);
-        console.log(data)
         http.send(data);
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -95,6 +95,7 @@ function editPro(idPro) {
             codInput.value = res[0].cod_producto;
             codInput.setAttribute('readonly', true); // Hacer el campo cod_producto solo lectura
             btnAccion.textContent = 'Actualizar';
+            document.getElementById('nuevoProducto').click();
             firstTab.show();
         }
     }

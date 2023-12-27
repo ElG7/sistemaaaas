@@ -43,14 +43,16 @@ class Productos extends Controlador
             if (empty($nombre_producto) || empty($precio) || empty($stock) || empty($imagen) || empty($categoria) || empty($sabor) || empty($fecha_vencimiento)) {
                 $respuesta = array('msg' => 'Todos los campos son requeridos', 'icono' => 'warning');
             } else {
+                $existeProducto = $this->model->existeProducto($cod_producto);
+                
                 if (!empty($imagen['name'])) {
                     $destino = $ruta . $nombreImg . '.jpg';
                 } else if (!empty($_POST['imagen_actual']) && empty($imagen['name'])) {
-                    $destino = $_POST['imagen_actual'];
+                    $destino = $_POST['imagen_actual'][0];
                 } else {
                     $destino = $ruta . 'default.png';
                 }
-                if (empty($cod_producto)) {
+                if (empty($existeProducto)) {
                     $data = $this->model->registrar($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $destino);
                     if ($data > 0) {
                         if (!empty($imagen['name'])) {

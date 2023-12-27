@@ -12,16 +12,16 @@ class IngredientesModel extends Query
         return $this->selectAll($sql);
     }
 
-    public function registrar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $producto_cod_producto, $fecha_vencimiento)
+    public function registrar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento)
     {
-        $sql = "INSERT INTO ingrediente (nombre_ingrediente, cod_ingrediente, detalle, stock, producto_cod_producto, fecha_vencimiento) VALUES (?,?,?,?,?,?)";
-        $array = array($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $producto_cod_producto, $fecha_vencimiento);
+        $sql = "INSERT INTO ingrediente (nombre_ingrediente, cod_ingrediente, detalle, stock, fecha_vencimiento) VALUES (?,?,?,?,?)";
+        $array = array($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento);
         return $this->insertar($sql, $array);
     }
 
-    public function verificarIngrediente($nombre_ingrediente)
+    public function verificarIngrediente($cod_ingrediente)
     {
-        $sql="SELECT nombre_ingrediente FROM ingrediente WHERE nombre_ingrediente = '$nombre_ingrediente'";
+        $sql="SELECT cod_ingrediente FROM ingrediente WHERE cod_ingrediente = '$cod_ingrediente'";
         return $this->select($sql);
     }
 
@@ -38,10 +38,10 @@ class IngredientesModel extends Query
         return $this->select($sql);
     }
 
-    public function modificar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $producto_cod_producto, $fecha_vencimiento )
+    public function modificar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento )
     {
-        $sql = "UPDATE ingrediente SET nombre_ingrediente=?, detalle=?, stock=?, producto_cod_producto=?, fecha_vencimiento=? WHERE cod_ingrediente = '$cod_ingrediente'";
-        $array = array($nombre_ingrediente, $detalle, $stock, $producto_cod_producto, $fecha_vencimiento );
+        $sql = "UPDATE ingrediente SET nombre_ingrediente=?, detalle=?, stock=?, fecha_vencimiento=? WHERE cod_ingrediente = '$cod_ingrediente'";
+        $array = array($nombre_ingrediente, $detalle, $stock, $fecha_vencimiento );
         return $this->insertar($sql, $array);
     }
 }

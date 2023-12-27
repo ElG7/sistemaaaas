@@ -1,3 +1,5 @@
+<!-- <?php echo password_hash('unap123', PASSWORD_DEFAULT); ;?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 

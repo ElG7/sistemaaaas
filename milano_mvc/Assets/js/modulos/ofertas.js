@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
             { data: 'cod_oferta' },
             { data: 'descripcion' },
             { data: 'descuento' },
-            { data: 'tiempo' },
+            { data: 'tiempo_inicio' },
+            { data: 'tiempo_fin' },
             { data: 'producto_cod_producto' },
             { data: 'accion' },
         ],
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function eliminarPro(idOfert) {
+function eliminarOfert(idOfert) {
     Swal.fire({
         title: 'Aviso',
         text: "Esta seguro de eliminar el oferta?",
@@ -74,7 +75,7 @@ function eliminarPro(idOfert) {
     })
 }
 
-function editPro(idOfert) {
+function editOfert(idOfert) {
     const url = "https://acinfo.inf.unap.cl/~brojas/interfaz2/milano_mvc/ofertas/edit/" + idOfert;
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
@@ -85,12 +86,14 @@ function editPro(idOfert) {
             const res = JSON.parse(this.responseText);
             document.querySelector('#descripcion').value = res[0].descripcion;
             document.querySelector('#descuento').value = res[0].descuento;
-            document.querySelector('#tiempo').value = res[0].tiempo;
+            document.querySelector('#tiempo_inicio').value = res[0].tiempo_inicio;
+            document.querySelector('#tiempo_fin').value = res[0].tiempo_fin;
             document.querySelector('#producto_cod_producto').value = res[0].producto_cod_producto;
             const codInput = document.querySelector('#cod_oferta');
             codInput.value = res[0].cod_oferta;
             codInput.setAttribute('readonly', true); // Hacer el campo cod_oferta solo lectura
             btnAccion.textContent = 'Actualizar';
+            document.getElementById('nuevoOferta').click();
             firstTab.show();
         }
     }

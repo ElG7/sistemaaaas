@@ -17,7 +17,20 @@ class Pedidos extends Controlador
         $data = $this->model->getPedidos('Pendiente');
         for ($i = 0; $i < count($data); $i++) {
             $data[$i]['accion'] = '<img class="d-flex">
-            <button class="btn btn-info" type="button" onclick="cambiarProceso(' . $data[$i]['cod_pedido'] . ')"><i class="fas fa-check-circle"></i></button>
+            <button class="btn btn-success" type="button" onclick="verPedido(' . $data[$i]['cod_pedido'] . ')"><i class="fas fa-eye"></i></button>
+            <button class="btn btn-info" type="button" onclick="cambiarProceso(' . $data[$i]['cod_pedido'] . ', \'Aceptado\')"><i class="fas fa-check-circle"></i></button>
+        </div>';
+        }
+        echo json_encode($data);
+        die();
+    }
+    public function listarAceptados()
+    {
+        $data = $this->model->getPedidos('Aceptado');
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['accion'] = '<img class="d-flex">
+            <button class="btn btn-success" type="button" onclick="verPedido(' . $data[$i]['cod_pedido'] . ')"><i class="fas fa-eye"></i></button>
+            <button class="btn btn-info" type="button" onclick="cambiarProceso(' . $data[$i]['cod_pedido'] . ',\'Completado\')"><i class="fas fa-check-circle"></i></button>
         </div>';
         }
         echo json_encode($data);
@@ -29,16 +42,19 @@ class Pedidos extends Controlador
         $data = $this->model->getPedidos('Completado');
         for ($i = 0; $i < count($data); $i++) {
             $data[$i]['accion'] = '<img class="d-flex">
-            <button class="btn btn-primary" type="button" onclick="eliminarPro(' . $data[$i]['cod_pedido'] . ')"><i class="fas fa-circle"></i></button>
+            <button class="btn btn-success" type="button" onclick="verPedido(' . $data[$i]['cod_pedido'] . ')"><i class="fas fa-eye"></i></button>
         </div>';
         }
         echo json_encode($data);
         die();
     }
-    public function update($idPedido)
+    public function update($datos)
     {
+        $array = explode(',', $datos);
+        $idPedido = $array[0];
+        $proceso = $array[1];
         if (is_numeric($idPedido)) {
-            $data = $this->model->actualizarEstado('Completado',$idPedido);
+            $data = $this->model->actualizarEstado($proceso,$idPedido);
             if ($data == 0) { // Si es true, actualización exitosa
                 $respuesta = array('msg' => 'pedido actualizado', 'icono' => 'success');
             } else { // Si es false, error en la actualización

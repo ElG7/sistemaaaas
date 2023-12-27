@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { data: 'nombre_ingrediente' },
             { data: 'stock' },
             { data: 'detalle' },
-            { data: 'producto_cod_producto' },
             { data: 'accion' },
         ],
         language,
@@ -87,11 +86,11 @@ function editIngre(idIngre) {
             document.querySelector('#detalle').value = res[0].detalle;
             document.querySelector('#stock').value = res[0].stock;
             document.querySelector('#fecha_vencimiento').value = res[0].fecha_vencimiento;
-            document.querySelector('#producto_cod_producto').value = res[0].producto_cod_producto;
             const codInput = document.querySelector('#cod_ingrediente');
             codInput.value = res[0].cod_ingrediente;
             codInput.setAttribute('readonly', true); // Hacer el campo cod_producto solo lectura
             btnAccion.textContent = 'Actualizar';
+            document.getElementById('nuevoIngrediente').click();
             firstTab.show();
         }
     }

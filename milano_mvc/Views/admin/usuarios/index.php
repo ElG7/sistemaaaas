@@ -1,6 +1,6 @@
 <?php include_once 'Views/Plantillas/header-admin.php';  ?>
 
-<button class="btn btn-primary mb-2" type="button" id="nuevo_registro">Nuevo</button>
+<button class="btn btn-primary mb-2" type="button" id="nuevo_registro" style="margin-left: 20px;">Nuevo</button>
 
 <div class="card">
     <div class="card-body">

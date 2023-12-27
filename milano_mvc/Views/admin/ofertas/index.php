@@ -1,5 +1,8 @@
 <?php include_once 'Views/Plantillas/header-admin.php';  ?>
 
+<button class="btn btn-success mb-2" type="button" id="btnEnviarWhatsApp" style="margin-left: 20px;">Enviar oferta WhatsApp</button>
+<button class="btn btn-primary mb-2" type="button" id="btnEnviarCorreo" style="margin-left: 20px;">Enviar oferta Correo</button>
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active" id="listaOferta" data-bs-toggle="tab" data-bs-target="#listaOfertaTab" type="button" role="tab" aria-controls="listaOferta" aria-selected="true">Productos</button>
@@ -13,13 +16,15 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover" style="width: 100;" id="tblOferta">
+                    <table class="table table-bordered table-striped table-hover" style="width: 100;" id="tblOfertas">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Descripcion</th>
                                 <th>Descuento</th>
-                                <th>Tiempo</th>
+                                <th>Tiempo Inicio</th>
+                                <th>Tiempo Fin</th>
+                                <th>Producto</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
@@ -57,8 +62,14 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group mb-2">
-                                <label for="tiempo">Tiempo</label>
-                                <input id="tiempo" class="form-control" type="daterange" name="tiempo" placeholder="Tiempo">
+                                <label for="tiempo_inicio">Tiempo Incio</label>
+                                <input id="tiempo_inicio" class="form-control" type="date" name="tiempo_inicio" placeholder="Tiempo Inicio">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mb-2">
+                                <label for="tiempo_fin">Tiempo Fin</label>
+                                <input id="tiempo_fin" class="form-control" type="date" name="tiempo_fin" placeholder="Tiempo Fin">
                             </div>
                         </div>
                         <div class="col-md-3">

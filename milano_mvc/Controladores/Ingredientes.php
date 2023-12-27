@@ -32,32 +32,31 @@ class Ingredientes extends Controlador
             $cod_ingrediente = $_POST['cod_ingrediente'];
             $detalle = $_POST['detalle'];
             $stock = $_POST['stock'];
-            $producto_cod_producto = $_POST['producto_cod_producto'];
             $fecha_vencimiento = $_POST['fecha_vencimiento'];
-            if ( empty($_POST['cod_ingrediente']) || empty($_POST['detalle']) || empty($_POST['stock']) || empty($_POST['producto_cod_producto'])|| empty($_POST['fecha_vencimiento'])) {
+            if (empty($cod_ingrediente) || empty($detalle) || empty($stock) || empty($fecha_vencimiento)) {
                 $respuesta = array('msg' => 'Todos los campos son requeridos', 'icono' => 'warning');
             } else {
-                if (empty($cod_ingrediente)) {
-                    $result = $this->model->verificarIngrediente($nombre_ingrediente);
-                    if (empty($result)) {
-                        $data = $this->model->registrar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $producto_cod_producto, $fecha_vencimiento);
-                        if ($data > 0) {
-                            $respuesta = array('msg' => 'Error al registrar', 'icono' => 'warning');
-                        } else {
-                            $respuesta = array('msg' => 'Ingrediente Registrado', 'icono' => 'success');
-                        }
+                $result = $this->model->verificarIngrediente($cod_ingrediente);
+
+                if (empty($result)) {
+                    // El ingrediente no existe, proceder con el registro
+                    $data = $this->model->registrar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento);
+                    if ($data > 0) {
+                        $respuesta = array('msg' => 'Ingrediente Registrado', 'icono' => 'success');
                     } else {
-                        $respuesta = array('msg' => 'Ingrediente ya existe', 'icono' => 'warning');
+                        $respuesta = array('msg' => 'Error al registrar', 'icono' => 'warning');
                     }
                 } else {
-                    $data = $this->model->modificar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $producto_cod_producto, $fecha_vencimiento);
-                        if ($data == 1) {
-                            $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
-                        } else {
-                            $respuesta = array('msg' => 'Ingrediente Modificado', 'icono' => 'success');
-                        }
+                    // El ingrediente ya existe, proceder con la modificación
+                    $data = $this->model->modificar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento);
+                    if ($data == 1) {
+                        $respuesta = array('msg' => 'Ingrediente Modificado', 'icono' => 'success');
+                    } else {
+                        $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
+                    }
                 }
             }
+
             echo json_encode($respuesta);
         }
         die();

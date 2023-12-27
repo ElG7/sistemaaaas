@@ -31,30 +31,28 @@ class Ofertas extends Controlador
             $cod_oferta = $_POST['cod_oferta'];
             $descripcion = $_POST['descripcion'];
             $descuento = $_POST['descuento'];
-            $tiempo = $_POST['tiempo'];
+            $tiempo_inicio = $_POST['tiempo_inicio'];
+            $tiempo_fin = $_POST['tiempo_fin'];
             $producto_cod_producto = $_POST['producto_cod_producto'];
-            if (empty($cod_oferta) || empty($descripcion) || empty($descuento) || empty($tiempo) || empty($producto_cod_producto)) {
+            if (empty($cod_oferta) || empty($descripcion) || empty($descuento) || empty($tiempo_inicio) || empty($tiempo_fin) || empty($producto_cod_producto)) {
                 $respuesta = array('msg' => 'Todos los campos son requeridos', 'icono' => 'warning');
             } else {
-                if (empty($cod_oferta)) {
-                    $result = $this->model->verificarOferta($cod_oferta);
-                    if (empty($result)) {
-                        $data = $this->model->registrar($cod_oferta, $descripcion, $descuento, $tiempo, $producto_cod_producto);
+                $result = $this->model->verificarOferta($cod_oferta);
+
+                if (empty($result)) {
+                        $data = $this->model->registrar($cod_oferta, $descripcion, $descuento, $tiempo_inicio, $tiempo_fin, $producto_cod_producto);
                         if ($data > 0) {
                             $respuesta = array('msg' => 'Error al registrar', 'icono' => 'warning');
                         } else {
                             $respuesta = array('msg' => 'Oferta Registrada', 'icono' => 'success');
                         }
-                    } else {
-                        $respuesta = array('msg' => 'Oferta ya existe', 'icono' => 'warning');
-                    }
                 } else {
-                    $data = $this->model->modificar($cod_oferta, $descripcion, $descuento, $tiempo, $producto_cod_producto);
-                        if ($data == 1) {
-                            $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
-                        } else {
-                            $respuesta = array('msg' => 'Oferta Modificada', 'icono' => 'success');
-                        }
+                    $data = $this->model->modificar($cod_oferta, $descripcion, $descuento, $tiempo_inicio, $tiempo_fin, $producto_cod_producto);
+                    if ($data == 1) {
+                        $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
+                    } else {
+                        $respuesta = array('msg' => 'Oferta Modificada', 'icono' => 'success');
+                    }
                 }
             }
             echo json_encode($respuesta);
