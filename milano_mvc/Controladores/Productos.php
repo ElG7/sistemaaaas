@@ -58,9 +58,9 @@ class Productos extends Controlador
                         if (!empty($imagen['name'])) {
                             move_uploaded_file($tmp_name, $destino);
                         }
-                        $respuesta = array('msg' => 'producto registrado', 'icono' => 'success');
-                    } else {
                         $respuesta = array('msg' => 'error al registrar', 'icono' => 'error');
+                    } else {
+                        $respuesta = array('msg' => 'producto registrado', 'icono' => 'success');
                     }
                 } else {
                     $data = $this->model->modificar($nombre_producto, $cod_producto, $precio, $stock, $sabor, $fecha_vencimiento, $categoria, $imagen);
@@ -68,9 +68,9 @@ class Productos extends Controlador
                         if (!empty($imagen['name'])) {
                             move_uploaded_file($tmp_name, $destino);
                         }
-                        $respuesta = array('msg' => 'producto modificado', 'icono' => 'success');
-                    } else {
                         $respuesta = array('msg' => 'error al modificar', 'icono' => 'error');
+                    } else {
+                        $respuesta = array('msg' => 'producto modificado', 'icono' => 'success');
                     }
                 }
             }

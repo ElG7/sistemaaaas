@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         columns: [
             { data: 'cod_oferta' },
             { data: 'descripcion' },
-            { data: 'descuento' },
             { data: 'tiempo_inicio' },
             { data: 'tiempo_fin' },
             { data: 'producto_cod_producto' },

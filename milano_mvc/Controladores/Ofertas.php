@@ -30,24 +30,23 @@ class Ofertas extends Controlador
         if (isset($_POST['cod_oferta'])) {
             $cod_oferta = $_POST['cod_oferta'];
             $descripcion = $_POST['descripcion'];
-            $descuento = $_POST['descuento'];
             $tiempo_inicio = $_POST['tiempo_inicio'];
             $tiempo_fin = $_POST['tiempo_fin'];
             $producto_cod_producto = $_POST['producto_cod_producto'];
-            if (empty($cod_oferta) || empty($descripcion) || empty($descuento) || empty($tiempo_inicio) || empty($tiempo_fin) || empty($producto_cod_producto)) {
+            if (empty($cod_oferta) || empty($descripcion) || empty($tiempo_inicio) || empty($tiempo_fin) || empty($producto_cod_producto)) {
                 $respuesta = array('msg' => 'Todos los campos son requeridos', 'icono' => 'warning');
             } else {
                 $result = $this->model->verificarOferta($cod_oferta);
 
                 if (empty($result)) {
-                        $data = $this->model->registrar($cod_oferta, $descripcion, $descuento, $tiempo_inicio, $tiempo_fin, $producto_cod_producto);
+                        $data = $this->model->registrar($cod_oferta, $descripcion, $tiempo_inicio, $tiempo_fin, $producto_cod_producto);
                         if ($data > 0) {
                             $respuesta = array('msg' => 'Error al registrar', 'icono' => 'warning');
                         } else {
                             $respuesta = array('msg' => 'Oferta Registrada', 'icono' => 'success');
                         }
                 } else {
-                    $data = $this->model->modificar($cod_oferta, $descripcion, $descuento, $tiempo_inicio, $tiempo_fin, $producto_cod_producto);
+                    $data = $this->model->modificar($cod_oferta, $descripcion, $tiempo_inicio, $tiempo_fin, $producto_cod_producto);
                     if ($data == 1) {
                         $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
                     } else {

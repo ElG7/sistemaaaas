@@ -1,6 +1,6 @@
 <?php include_once 'Views/Plantillas/header-admin.php';  ?>
 
-<button class="btn btn-success mb-2" type="button" id="btnEnviarWhatsApp" style="margin-left: 20px;">Enviar oferta WhatsApp</button>
+<a class="btn btn-success mb-2" href="<?php echo BASE_URL . 'WhatsappAPI'; ?>" id="btnEnviarWhatsApp" style="margin-left: 20px;">Enviar oferta WhatsApp</a>
 <button class="btn btn-primary mb-2" type="button" id="btnEnviarCorreo" style="margin-left: 20px;">Enviar oferta Correo</button>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -21,7 +21,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Descripcion</th>
-                                <th>Descuento</th>
                                 <th>Tiempo Inicio</th>
                                 <th>Tiempo Fin</th>
                                 <th>Producto</th>
@@ -52,12 +51,6 @@
                             <div class="form-group mb-2">
                                 <label for="descripcion">Descripcion</label>
                                 <input id="descripcion" class="form-control" type="text" name="descripcion" placeholder="Descripcion">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group mb-2">
-                                <label for="descuento">Descuento</label>
-                                <input id="descuento" class="form-control" type="number" name="descuento" placeholder="Descuento">
                             </div>
                         </div>
                         <div class="col-md-3">

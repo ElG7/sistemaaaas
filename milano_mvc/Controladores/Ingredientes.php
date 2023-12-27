@@ -42,17 +42,17 @@ class Ingredientes extends Controlador
                     // El ingrediente no existe, proceder con el registro
                     $data = $this->model->registrar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento);
                     if ($data > 0) {
-                        $respuesta = array('msg' => 'Ingrediente Registrado', 'icono' => 'success');
-                    } else {
                         $respuesta = array('msg' => 'Error al registrar', 'icono' => 'warning');
+                    } else {
+                        $respuesta = array('msg' => 'Ingrediente Registrado', 'icono' => 'success');
                     }
                 } else {
                     // El ingrediente ya existe, proceder con la modificación
                     $data = $this->model->modificar($nombre_ingrediente, $cod_ingrediente, $detalle, $stock, $fecha_vencimiento);
                     if ($data == 1) {
-                        $respuesta = array('msg' => 'Ingrediente Modificado', 'icono' => 'success');
-                    } else {
                         $respuesta = array('msg' => 'Error al modificar', 'icono' => 'warning');
+                    } else {
+                        $respuesta = array('msg' => 'Ingrediente Modificado', 'icono' => 'success');
                     }
                 }
             }
